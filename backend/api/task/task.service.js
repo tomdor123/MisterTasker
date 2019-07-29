@@ -60,7 +60,7 @@ async function add(task) {
 async function remove(taskId) {
     const collection = await dbService.getCollection(COLLECTION_KEY)
     try {
-        await collection.remove({"_id":ObjectId(taskId)})
+        await collection.deleteOne({"_id":ObjectId(taskId)})
     } catch (err) {
         logger.error(`cannot remove task ${taskId}`)
         throw err;
