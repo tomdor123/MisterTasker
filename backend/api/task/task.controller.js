@@ -19,9 +19,10 @@ async function query(req, res) {
 }
 
 async function performTask(req, res) {
-    // const { task } = req.body
+    console.log(req.query)
     try {
         await taskService.performTask()
+        res.send(true)
     } catch (error) {
         res.status(500).send({ error })
     }

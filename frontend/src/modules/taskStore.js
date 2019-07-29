@@ -32,7 +32,14 @@ export default {
                 await taskService.remove(id);
                 context.commit({type: 'removeTask', id})
             } catch (err) {
-                console.log('got error: ', err)
+                console.log('got error while removing task: ', err)
+            }
+        },
+        async doTask(context, { task }){
+            try {
+                await taskService.doTask(task);
+            } catch (err) {
+                console.log('got error while doing task: ', err);
             }
         }
     },

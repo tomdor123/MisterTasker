@@ -8,7 +8,7 @@
     <div class="description">
       <span>Desctiption:</span>
     </div>
-    <textarea></textarea>
+    <textarea v-model="description"></textarea>
     <div class="importance">
       <span>Importance:</span>
       {{task.importance}}
@@ -21,16 +21,26 @@
       <span>Tries Count:</span>
       {{task.triesCount}}
     </div>
-    <button class="send-btn">Send</button>
+    <button class="send-btn" @click="doTask">Send</button>
   </section>
 </template>
 
 <script>
 export default {
   props: ["task"],
+  data() {
+    return {
+      description: '',
+    }
+  },
   methods: {
     removeTask() {
       this.$store.dispatch({ type: "removeTask", id: this.task._id });
+    },
+    doTask(){
+      const taskCopy = JSON.parse(JSON.stringify(this.task))
+      taskCopy.description = this.description
+      this.$store.dispatch({type: 'doTask', task: taskCopy})
     }
   }
 };
@@ -60,7 +70,7 @@ export default {
 
   & .send-btn {
     @include btn;
-    margin-bottom:5px;
+    margin-bottom: 5px;
     background-color: #00d800;
   }
 }

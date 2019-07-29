@@ -2,7 +2,8 @@ export default {
     add,
     query,
     getById,
-    remove
+    remove,
+    doTask
 }
 
 import httpService from './httpService'
@@ -21,4 +22,8 @@ async function getById(id) {
 
 async function remove(id) {
     return await httpService.delete(`task/${id}`)
+}
+
+async function doTask(task) {
+    return await httpService.get(`task/1234/start`, null , task)
 }
