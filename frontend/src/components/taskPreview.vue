@@ -21,7 +21,6 @@
       <span>Tries Count:</span>
       {{task.triesCount}}
     </div>
-    <button class="send-btn" @click="doTask">Send</button>
   </section>
 </template>
 
@@ -37,11 +36,6 @@ export default {
     removeTask() {
       this.$store.dispatch({ type: "removeTask", id: this.task._id });
     },
-    doTask(){
-      const taskCopy = JSON.parse(JSON.stringify(this.task))
-      taskCopy.description = this.description
-      this.$store.dispatch({type: 'doTask', task: taskCopy})
-    }
   }
 };
 </script>

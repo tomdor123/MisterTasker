@@ -4,11 +4,12 @@ module.exports = {
     remove,
     getById,
     update,
-    perormTask
+    performAllTasks
 }
 
-const loggger = require('../../services/logger.service')
+const logger = require('../../services/logger.service')
 const dbService = require('../../services/db.service')
+const q = require('../queue')();
 const ObjectId = require('mongodb').ObjectId
 const COLLECTION_KEY = 'task'
 
@@ -32,25 +33,50 @@ async function query(filterBy = {}){
         const sorted = tasks.reverse()
         return sorted
     } catch (err) {
-        loggger.error('cannot find tasks')
+        logger.error('cannot find tasks')
         throw err;
     }
 }
 
-function perormTask(task) {
+async function performAllTasks(){
+    let tasks;
+    let result = {};
+    try {
+        tasks = await query();
+    } catch(err){
+        logger.error('had problems performing tasks')
+    }
+    if(tasks) tasks.forEach(task => q.enqueue(task))
+    while(!q.isEmpty()){
+        let task = q.dequeue();
+        logger.info('performing task:' + task);
+        try {
+            let res = await _performTask(task);
+            logger.info('success task is DONE')
+            result[task.title] = res;
+        } catch(err) {
+            logger.error('Task Failed, putting it back at end of Queue')
+            q.enqueue(task);
+        }
+    }
+    return promise.resolve(result);
+}
+
+function _performTask(task) {
     return new Promise((resolve, reject)=>{
     setTimeout(()=>{
-    if (Math.random() > 0.5) resolve(parseInt(Math.random() * 100))
-    else reject('Err');
+        if (Math.random() > 0.5) resolve(parseInt(Math.random() * 100))
+        else reject('error')
     }, 0)
     })
-   }
+}
 
 async function add(task) {
     const collection = await dbService.getCollection(COLLECTION_KEY)
     try {
-        const taskWithId = await collection.insertOne(task);
-        return taskWithId;
+        task.createdAt = Date.now();
+        const res = await collection.insertOne(task);
+        return res.ops[0];
     } catch (err) {
         logger.error(`cannot insert task`)
         throw err;
@@ -93,5 +119,5 @@ async function getById(taskId) {
 
 function _quote(regex) {
     return regex.replace(/([()[{*+.$^\\|?])/g, '\\$1');
-  }
+}
 

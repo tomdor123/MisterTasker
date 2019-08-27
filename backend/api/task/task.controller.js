@@ -3,7 +3,7 @@ module.exports = {
     add,
     remove,
     getById,
-    performTask
+    performAllTasks
 }
 
 const taskService = require('./task.service')
@@ -18,11 +18,10 @@ async function query(req, res) {
     }
 }
 
-async function performTask(req, res) {
-    console.log(req.query)
+async function performAllTasks(req, res) {
     try {
-        await taskService.performTask()
-        res.send(true)
+        const result = await taskService.performAllTasks()
+        res.send(result)
     } catch (error) {
         res.status(500).send({ error })
     }

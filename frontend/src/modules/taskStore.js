@@ -11,6 +11,9 @@ export default {
         removeTask(state, { id }) {
             const idx = state.tasks.findIndex(task => task._id === id)
             state.tasks.splice(idx, 1);
+        },
+        addTask(state, { task }){
+            state.tasks.push(task);
         }
     },
     getters: {
@@ -35,11 +38,20 @@ export default {
                 console.log('got error while removing task: ', err)
             }
         },
-        async doTask(context, { task }){
+        async performAllTasks(context, { task }){
             try {
-                await taskService.doTask(task);
+                const result = await taskService.performAllTasks();
+                console.log('all tasks performed: ',result)
             } catch (err) {
-                console.log('got error while doing task: ', err);
+                console.log('got error while performing all tasks: ', err);
+            }
+        },
+        async addTask(context, { task }) {
+            try {
+                const taskWithId = await taskService.add(task);
+                context.commit({type:'addTask', task: taskWithId})
+            } catch(err) {
+                console.log('got error while adding task')
             }
         }
     },

@@ -1,5 +1,5 @@
 const express = require('express');
-const {query, getById, remove, add, performTask} = require('./task.controller')
+const {query, getById, remove, add, performAllTasks} = require('./task.controller')
 
 const router = express.Router()
 module.exports = router
@@ -17,4 +17,4 @@ router.post('/', add)
 router.delete('/:id', remove)
 
 //PERFORM TASK
-router.get('/1234/start', performTask)
+router.get('/1234/start', performAllTasks)
