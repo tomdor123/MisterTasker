@@ -21,7 +21,7 @@ async function query(req, res) {
 async function performAllTasks(req, res) {
     try {
         const result = await taskService.performAllTasks()
-        res.send(result)
+        res.json(result)
     } catch (error) {
         res.status(500).send({ error })
     }

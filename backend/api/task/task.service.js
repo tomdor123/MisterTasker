@@ -39,27 +39,28 @@ async function query(filterBy = {}){
 }
 
 async function performAllTasks(){
-    let tasks;
-    let result = {};
-    try {
-        tasks = await query();
-    } catch(err){
-        logger.error('had problems performing tasks')
-    }
-    if(tasks) tasks.forEach(task => q.enqueue(task))
-    while(!q.isEmpty()){
-        let task = q.dequeue();
-        logger.info('performing task:' + task);
+    return new Promise(async (resolve, reject) => {
+        let tasks;
+        let result = {};
         try {
-            let res = await _performTask(task);
-            logger.info('success task is DONE')
-            result[task.title] = res;
-        } catch(err) {
-            logger.error('Task Failed, putting it back at end of Queue')
-            q.enqueue(task);
+            tasks = await query();
+        } catch(err){
+            logger.error('had problems performing tasks')
         }
-    }
-    return promise.resolve(result);
+        if(tasks) tasks.forEach(task => q.enqueue(task))
+        while(!q.isEmpty()){
+            let task = q.dequeue();
+            logger.info('performing task: ' + task.title );
+            try {
+                let res = await _performTask(task);
+                result[task.title] = res;
+            } catch(err) {
+                logger.error('Task Failed, putting it back at end of Queue')
+                q.enqueue(task);
+            }
+        }
+        return resolve(result);
+    })
 }
 
 function _performTask(task) {
