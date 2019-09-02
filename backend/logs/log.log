@@ -248,3 +248,26 @@ Tue, 27 Aug 2019 14:32:23 GMT-Error-Task Failed, putting it back at end of Queue
 Tue, 27 Aug 2019 14:32:23 GMT-Info-performing task: Delete Old Photos
 Tue, 27 Aug 2019 14:32:23 GMT-Error-Task Failed, putting it back at end of Queue
 Tue, 27 Aug 2019 14:32:23 GMT-Info-performing task: Delete Old Photos
+Tue, 27 Aug 2019 17:03:41 GMT-Info-Example app listening on port3000!
+Tue, 27 Aug 2019 17:03:55 GMT-Info-performing task: do this
+Tue, 27 Aug 2019 17:03:55 GMT-Error-Task Failed, putting it back at end of Queue
+Tue, 27 Aug 2019 17:03:55 GMT-Info-performing task: hi there
+Tue, 27 Aug 2019 17:03:55 GMT-Info-performing task: Delete Old Photos
+Tue, 27 Aug 2019 17:03:55 GMT-Info-performing task: do this
+Tue, 27 Aug 2019 17:03:55 GMT-Error-Task Failed, putting it back at end of Queue
+Tue, 27 Aug 2019 17:03:55 GMT-Info-performing task: do this
+Tue, 27 Aug 2019 17:03:58 GMT-Info-performing task: do this
+Tue, 27 Aug 2019 17:03:58 GMT-Info-performing task: hi there
+Tue, 27 Aug 2019 17:03:58 GMT-Error-Task Failed, putting it back at end of Queue
+Tue, 27 Aug 2019 17:03:58 GMT-Info-performing task: Delete Old Photos
+Tue, 27 Aug 2019 17:03:58 GMT-Info-performing task: hi there
+Tue, 27 Aug 2019 17:03:58 GMT-Error-Task Failed, putting it back at end of Queue
+Tue, 27 Aug 2019 17:03:58 GMT-Info-performing task: hi there
+Tue, 27 Aug 2019 17:03:58 GMT-Error-Task Failed, putting it back at end of Queue
+Tue, 27 Aug 2019 17:03:58 GMT-Info-performing task: hi there
+Tue, 27 Aug 2019 17:03:58 GMT-Error-Task Failed, putting it back at end of Queue
+Tue, 27 Aug 2019 17:03:58 GMT-Info-performing task: hi there
+Tue, 27 Aug 2019 17:03:58 GMT-Error-Task Failed, putting it back at end of Queue
+Tue, 27 Aug 2019 17:03:58 GMT-Info-performing task: hi there
+Tue, 27 Aug 2019 17:09:27 GMT-Info-Example app listening on port3000!
+Tue, 27 Aug 2019 17:11:47 GMT-Info-Example app listening on port3000!
