@@ -6,7 +6,6 @@ const cors = require('cors');
 const path = require('path')
 const app = express();
 const http = require('http').createServer(app);
-const socketService = require('./services/socket.service')
 const logger = require('./services/logger.service')
 
 app.use(cookieParser());
@@ -28,10 +27,8 @@ app.use(session({
     secret: 'puki muki',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false, maxAge: 1000*60*60*1000 }
+    cookie: { secure: false, maxAge: 1000 * 60 * 60 * 1000 }
 }));
-
-socketService.setup(http);
 
 //ROUTES
 const taskRoute = require('./api/task/task.routes');
